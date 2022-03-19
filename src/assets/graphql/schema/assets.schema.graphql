@@ -1,0 +1,54 @@
+enum FileTypeEnums {
+	image
+	video
+}
+
+type AssetsSchema {
+	_id: ObjectID!
+	type: FileTypeEnums
+	filename: String
+	mimetype: String
+	extension: String
+	score_type_1: Int
+	score_type_2: Int
+	score_type_3: Int
+}
+
+input AssetBody {
+	type: String
+	filename: String
+	mimetype: String
+	extension: String
+}
+
+input ScoreBody {
+	_id: ObjectID!
+	score_type_1: Int!
+	score_type_2: Int!
+	score_type_3: Int!
+}
+
+input ScoreQuery {
+	score_type: String
+	asset_type: String
+}
+
+type AssetResponse {
+	status: Int
+	data: AssetsSchema
+}
+
+type AverageResponse {
+	status: Int
+	average: Float
+}
+
+type Query {
+	get_asset(_id: ObjectID!): AssetResponse
+	get_average_score_asset_type(query: ScoreQuery!): AverageResponse
+}
+
+type Mutation {
+	add_asset(body: AssetBody!): AssetResponse
+	add_scores(body: ScoreBody!): AssetResponse
+}
