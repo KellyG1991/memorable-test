@@ -5,6 +5,8 @@
 
 - <strong>Framework</strong>: Nestjs
 
+- <strong>Database</strong>: Mongodb
+
 ## How to start application
 
 1. Make sure your system has Nodejs and Mongodb
