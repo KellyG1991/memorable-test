@@ -3,13 +3,16 @@ import database from './config/database';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './mongoose.service';
+import { TestDatabaseService } from './testDatabaseService';
 
-@Module({
+@Module( {
     imports: [
-        ConfigModule.forFeature(database),
-        MongooseModule.forRootAsync({
+        ConfigModule.forFeature( database ),
+        MongooseModule.forRootAsync( {
             useClass: MongooseConfigService,
-        })
+        } )
     ],
-})
-export class DatabaseModule {}
+    providers: [ TestDatabaseService ],
+    exports: [ TestDatabaseService ],
+} )
+export class DatabaseModule { }

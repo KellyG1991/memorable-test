@@ -1,11 +1,10 @@
-import { Injectable, HttpStatus, NotFoundException } from '@nestjs/common';
+import { Injectable, HttpStatus, NotFoundException, BadRequestException } from '@nestjs/common';
 import { BaseService } from '../utils/mongoose/base.service';
 import { AssetsModel } from './model/assets.model';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
-import { Connection, Types } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Types } from 'mongoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { addAssets, updateAssets } from '../utils/interfaces/asset.interface';
-import { FileTypesEnums } from '../utils/enums/file.types.enums';
 import { OnModuleInit } from '@nestjs/common';
 
 @Injectable()
@@ -13,8 +12,7 @@ export class AssetsService extends BaseService<AssetsModel>
     implements OnModuleInit
 {
     constructor (
-        @InjectConnection()
-        private readonly connection: Connection,
+
         @InjectModel( AssetsModel.modelName )
         private readonly assetsModel: ReturnModelType<
             typeof AssetsModel
@@ -31,6 +29,11 @@ export class AssetsService extends BaseService<AssetsModel>
 
     async addAsset ( assetBody: addAssets )
     {
+        const exists = await super.findOne( Object.assign( assetBody ) );
+        if ( exists ) return {
+            status: HttpStatus.BAD_REQUEST,
+            message: 'Duplicate asset detected.'
+        }
         return {
             status: HttpStatus.CREATED,
             data: await super.create( Object.assign( assetBody ) )
@@ -42,7 +45,10 @@ export class AssetsService extends BaseService<AssetsModel>
 
         const exists = await super.findById( updateBody._id )
 
-        if ( !exists ) throw new NotFoundException( "Asset Not Found" )
+        if ( !exists ) return {
+            status: HttpStatus.NOT_FOUND,
+            message: "Asset not found."
+        }
 
         await super.updateById(
             updateBody._id,

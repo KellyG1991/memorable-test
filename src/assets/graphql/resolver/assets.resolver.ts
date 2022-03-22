@@ -37,7 +37,7 @@ export class AssetsResolver
 
     @Mutation( "add_scores" )
     @UseFilters( GraphQLExceptionFilter )
-    async addScoreTypes ( @Args( "body" ) body: UpdateAssetsDto )
+    async addScores ( @Args( "body" ) body: UpdateAssetsDto )
     {
         return this.assetsService.updateAsset( Object.assign( body ) )
     }

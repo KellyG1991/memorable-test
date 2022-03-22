@@ -17,14 +17,14 @@ export class AssetsModel extends BaseSchema
     @prop( { type: String, required: true } )
     mimetype: string
 
-    @prop( { type: Number, required: false, default: 0, min: 0, max: 100 } )
-    score_type_1?: Number
+    @prop( { type: Number, required: false, min: 0, max: 100, default: 0, } )
+    score_type_1?: number
 
-    @prop( { type: Number, required: false, default: 0, min: 0, max: 100 } )
-    score_type_2?: Number
+    @prop( { type: Number, required: false, min: 0, max: 100, default: 0, } )
+    score_type_2?: number
 
-    @prop( { type: Number, required: false, default: 0, min: 0, max: 100 } )
-    score_type_3?: Number
+    @prop( { type: Number, required: false, min: 0, max: 100, default: 0 } )
+    score_type_3?: number
 
     static get modelName ()
     {

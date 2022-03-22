@@ -31,25 +31,26 @@ export class AddAssetsDto
 export class UpdateAssetsDto
 {
 
+    @IsNotEmpty()
     @IsString()
-    @IsNotEmpty()
-    _id: Types.ObjectId
+    _id?: Types.ObjectId
 
+    @IsNotEmpty()
     @IsNumber()
     @Max( 100 )
     @Min( 0 )
-    @IsNotEmpty()
-    score_type_1: number
+    score_type_1?: number
 
+
+    @IsNotEmpty()
     @IsNumber()
     @Max( 100 )
     @Min( 0 )
-    @IsNotEmpty()
-    score_type_2: number
+    score_type_2?: number
 
+    @IsNotEmpty()
     @IsNumber()
     @Max( 100 )
     @Min( 0 )
-    @IsNotEmpty()
-    score_type_3: number
+    score_type_3?: number
 }

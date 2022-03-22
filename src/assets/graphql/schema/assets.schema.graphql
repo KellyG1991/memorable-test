@@ -36,11 +36,13 @@ input ScoreQuery {
 type AssetResponse {
 	status: Int
 	data: AssetsSchema
+	message: String
 }
 
 type AverageResponse {
 	status: Int
 	average: Float
+	message: String
 }
 
 type Query {

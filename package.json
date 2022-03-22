@@ -25,7 +25,7 @@
 		"start:production": "npm run start:prod",
 		"lint:check": "eslint '{src,apps,libs,test}/**/*.ts'",
 		"lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
-		"test": "cross-env NODE_ENV='test' jest --detectOpenHandles --testTimeout=0",
+		"test": "cross-env NODE_ENV='test' jest --detectOpenHandles --testTimeout=0 --verbose ",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",
 		"test:debug": "cross-env NODE_ENV_FILE_PATH='.env.test' node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",

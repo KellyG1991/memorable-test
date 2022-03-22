@@ -14,7 +14,10 @@ import { AssetsModule } from './assets/assets.module';
         ConfigModule.forRoot( {
             isGlobal: true,
             load: [ app ],
-            envFilePath: process.env.NODE_ENV_FILE_PATH || '.env',
+            envFilePath:
+                process.env.NODE_ENV === 'test'
+                    ? '.env.test'
+                    : process.env.NODE_ENV_FILE_PATH || '.env',
             expandVariables: true,
         } ),
         UtilsModule,
